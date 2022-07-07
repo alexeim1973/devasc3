@@ -60,7 +60,7 @@ def main():
     # response will tell us the URL of the newly-created resource, simplifying
     # future removal.
     print(add_pools_resp.status_code)
-    print(add_pools_resp.message)
+    print(add_pools_resp.reason)
     
     if add_pools_resp.status_code == 201:
         print(f"Added DHCP pool at: {add_pools_resp.headers['Location']}")
