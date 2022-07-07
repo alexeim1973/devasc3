@@ -21,7 +21,7 @@ def main():
     # several minor options to set up.
     connect_params = {
         "host": "sandbox-nxos-1.cisco.com",
-        "port": 10000,
+        "port": 830,
         "username": "admin",
         "password": "Admin_1234!",
         "hostkey_verify": False,
