@@ -20,7 +20,7 @@ def main():
     # via NETCONF. Because SSH is the underlying transport, there are
     # several minor options to set up.
     connect_params = {
-        "host": "sbx-nxos-mgmt.cisco.com",
+        "host": "sandbox-nxos-1.cisco.com",
         "port": 10000,
         "username": "admin",
         "password": "Admin_1234!",
