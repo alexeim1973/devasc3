@@ -21,6 +21,8 @@ module: openconfig-interfaces
         |  +--ro oper-status      enumeration
         |  +--ro last-change?     oc-types:timeticks64
         |  +--ro logical?         boolean
+        |  +--ro management?      boolean
+        |  +--ro cpu?             boolean
         |  +--ro counters
         |     +--ro in-octets?             oc-yang:counter64
         |     +--ro in-pkts?               oc-yang:counter64
@@ -64,6 +66,8 @@ module: openconfig-interfaces
                  +--ro oper-status     enumeration
                  +--ro last-change?    oc-types:timeticks64
                  +--ro logical?        boolean
+                 +--ro management?     boolean
+                 +--ro cpu?            boolean
                  +--ro counters
                     +--ro in-octets?             oc-yang:counter64
                     +--ro in-pkts?               oc-yang:counter64

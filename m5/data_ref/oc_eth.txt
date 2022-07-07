@@ -1,21 +1,26 @@
 module: openconfig-if-ethernet
+
   augment /oc-if:interfaces/oc-if:interface:
     +--rw ethernet
        +--rw config
-       |  +--rw mac-address?           oc-yang:mac-address
-       |  +--rw auto-negotiate?        boolean
-       |  +--rw duplex-mode?           enumeration
-       |  +--rw port-speed?            identityref
-       |  +--rw enable-flow-control?   boolean
+       |  +--rw mac-address?                oc-yang:mac-address
+       |  +--rw auto-negotiate?             boolean
+       |  +--rw standalone-link-training?   boolean
+       |  +--rw duplex-mode?                enumeration
+       |  +--rw port-speed?                 identityref
+       |  +--rw enable-flow-control?        boolean
+       |  +--rw fec-mode?                   identityref
        +--ro state
-          +--ro mac-address?              oc-yang:mac-address
-          +--ro auto-negotiate?           boolean
-          +--ro duplex-mode?              enumeration
-          +--ro port-speed?               identityref
-          +--ro enable-flow-control?      boolean
-          +--ro hw-mac-address?           oc-yang:mac-address
-          +--ro negotiated-duplex-mode?   enumeration
-          +--ro negotiated-port-speed?    identityref
+          +--ro mac-address?                oc-yang:mac-address
+          +--ro auto-negotiate?             boolean
+          +--ro standalone-link-training?   boolean
+          +--ro duplex-mode?                enumeration
+          +--ro port-speed?                 identityref
+          +--ro enable-flow-control?        boolean
+          +--ro fec-mode?                   identityref
+          +--ro hw-mac-address?             oc-yang:mac-address
+          +--ro negotiated-duplex-mode?     enumeration
+          +--ro negotiated-port-speed?      identityref
           +--ro counters
              +--ro in-mac-control-frames?    oc-yang:counter64
              +--ro in-mac-pause-frames?      oc-yang:counter64
@@ -26,6 +31,14 @@ module: openconfig-if-ethernet
              +--ro in-8021q-frames?          oc-yang:counter64
              +--ro in-crc-errors?            oc-yang:counter64
              +--ro in-block-errors?          oc-yang:counter64
+             +--ro in-carrier-errors?        oc-yang:counter64
+             +--ro in-interrupted-tx?        oc-yang:counter64
+             +--ro in-late-collision?        oc-yang:counter64
+             +--ro in-mac-errors-rx?         oc-yang:counter64
+             +--ro in-single-collision?      oc-yang:counter64
+             +--ro in-symbol-error?          oc-yang:counter64
+             +--ro in-maxsize-exceeded?      oc-yang:counter64
              +--ro out-mac-control-frames?   oc-yang:counter64
              +--ro out-mac-pause-frames?     oc-yang:counter64
              +--ro out-8021q-frames?         oc-yang:counter64
+             +--ro out-mac-errors-tx?        oc-yang:counter64
