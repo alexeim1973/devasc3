@@ -63,7 +63,7 @@ def main():
         # print(add_pools_resp.reason)
     
         if dhcp_pool_resp.status_code == 204:
-            print(f"Deleted DHCP pool at:", headers)
+            print(f"Deleted DHCP pool:", dhcp_pool["id"])
 
         # Save configuration whenever the DHCP pool is deleted. This ensures
         # the configuration will persist across reboots.
