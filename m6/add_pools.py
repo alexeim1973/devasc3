@@ -37,8 +37,8 @@ def main():
     # Create JSON structure to add a new pool along with the HTTP POST
     # headers needed to add it.
     for pool in config_state["add_pools"]:
-        add_pool = {"Cisco-IOS-XE-dhcp:pool": pool }
-        post_headers = {
+        dhcp_pool = {"Cisco-IOS-XE-dhcp:pool": pool }
+        headers = {
             "Content-Type": "application/yang-data+json",
             "Accept": "application/yang-data+json, application/yang-data.errors+json",
         }
@@ -49,28 +49,28 @@ def main():
     # Issue HTTP POST request to a similar URL used for the GET request,
     # except carrying the new DHCP pool in the HTTP body. Also, we don't need
     # to specify "/pool" since the dictionary key in the body carries it.
-        add_pools_resp = requests.post(
+        dhcp_pools_resp = requests.post(
             f"{api_path}/data/Cisco-IOS-XE-native:native/ip/dhcp",
-            headers=post_headers,
+            headers=headers,
             auth=auth,
-            json=add_pool,
+            json=dhcp_pool,
             verify=False,
         )
 
     # HTTP 201 means "created", implying a new resource was added. The
     # response will tell us the URL of the newly-created resource, simplifying
     # future removal.
-        print(add_pools_resp.status_code)
-        print(add_pools_resp.reason)
+        print(dhcp_pools_resp.status_code)
+        print(dhcp_pools_resp.reason)
     
-        if add_pools_resp.status_code == 201:
-            print(f"Added DHCP pool at: {add_pools_resp.headers['Location']}")
+        if dhcp_pools_resp.status_code == 201:
+            print(f"Added DHCP pool at: {dhcp_pools_resp.headers['Location']}")
 
         # Save configuration whenever the DHCP pool is added. This ensures
         # the configuration will persist across reboots.
             save_config_resp = requests.post(
                 f"{api_path}/operations/cisco-ia:save-config",
-                headers=post_headers,
+                headers=headers,
                 auth=auth,
                 verify=False,
             )
@@ -79,8 +79,8 @@ def main():
         # import json; print(json.dumps(save_config_resp.json(), indent=2))
             if save_config_resp.ok:
                 print("Saved configuration")
-        elif add_pools_resp.status_code == 409:
-            print('DHCP pool already exists.')
+        elif dhcp_pools_resp.status_code == 409:
+            print('DHCP pool already exists:', headers)
 
 
 if __name__ == "__main__":

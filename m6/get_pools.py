@@ -30,13 +30,13 @@ def main():
     auth = ("developer", "C1sco12345")
 
     # Define headers for issuing HTTP GET requests to receive YANG data as JSON.
-    get_headers = {"Accept": "application/yang-data+json"}
+    headers = {"Accept": "application/yang-data+json"}
 
     # Issue a GET request to collect the DHCP pool information only. This will
     # return a list of dictionaries where each dictionary represents a pool.
-    get_pools_resp = requests.get(
+    dhcp_pools_resp = requests.get(
         f"{api_path}/data/Cisco-IOS-XE-native:native/ip/dhcp/pool",
-        headers=get_headers,
+        headers=headers,
         auth=auth,
         verify=False,
     )
@@ -44,13 +44,13 @@ def main():
     # If the request succeed with a 200 "OK" message and there is
     # some text defined, then step through the JSON and extract the useful
     # bits of information.
-    if get_pools_resp.status_code == 200 and get_pools_resp.text:
+    if dhcp_pools_resp.status_code == 200 and dhcp_pools_resp.text:
 
         # Uncomment the line below to see the JSON response; great for learning
         # import json; print(json.dumps(get_pools_resp.json(), indent=2))
 
         # Parse JSON from body and iterate over dicts in list
-        pools = get_pools_resp.json()["Cisco-IOS-XE-dhcp:pool"]
+        pools = dhcp_pools_resp.json()["Cisco-IOS-XE-dhcp:pool"]
         for pool in pools:
             net = pool["network"]["primary-network"]
             print(f"ID: {pool['id']}")
@@ -65,7 +65,7 @@ def main():
                 print(f"    {dns}")
     else:
         # Response had no body, saw error (e.g. 400), or no content (204)
-        print("No DHCP pools currently configured")
+        print("No DHCP pools currently configured.")
 
 
 if __name__ == "__main__":
