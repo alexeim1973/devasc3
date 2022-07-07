@@ -23,7 +23,7 @@ def main():
     # which may change in the future. Be sure to check the IP address as
     # I suspect this changes frequently. See here for more details:
     # https://developer.cisco.com/site/ios-xe
-    api_path = "https://ios-xe-mgmt-latest.cisco.com:9443/restconf"
+    api_path = "https://sandbox-iosxe-latest-1.cisco.com:443/restconf"
 
     # Create 2-tuple for "basic" authentication using Cisco DevNet credentials.
     # No fancy tokens needed to get basic RESTCONF working on Cisco IOS-XE.
