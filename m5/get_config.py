@@ -43,13 +43,13 @@ def main():
         nc_filter = """
             <interfaces xmlns="http://openconfig.net/yang/interfaces">
                 <interface>
-                    <name>eth1/71</name>
+                    <name>eth1/1</name>
                 </interface>
                 <interface>
-                    <name>eth1/72</name>
+                    <name>eth1/2</name>
                 </interface>
                 <interface>
-                    <name>eth1/73</name>
+                    <name>eth1/3</name>
                 </interface>
             </interfaces>
         """
