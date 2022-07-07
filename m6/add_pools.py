@@ -78,6 +78,8 @@ def main():
         # import json; print(json.dumps(save_config_resp.json(), indent=2))
         if save_config_resp.ok:
             print("Saved configuration")
+    elif add_pools_resp.status_code == 409:
+        print('DHCP pool already exists.')
 
 
 if __name__ == "__main__":
