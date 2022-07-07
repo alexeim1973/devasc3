@@ -43,12 +43,12 @@ def main():
             "Accept": "application/yang-data+json, application/yang-data.errors+json",
         }
 
-    # Can double-check our HTTP body using this debug; great for learning
-    # import json; print(json.dumps(add_pools, indent=2))
+        # Can double-check our HTTP body using this debug; great for learning
+        # import json; print(json.dumps(add_pools, indent=2))
 
-    # Issue HTTP POST request to a similar URL used for the GET request,
-    # except carrying the new DHCP pool in the HTTP body. Also, we don't need
-    # to specify "/pool" since the dictionary key in the body carries it.
+        # Issue HTTP DELETE request to a similar URL used for the POST request,
+        # except deleteing the existing DHCP pool in the HTTP body. Also, we don't need
+        # to specify "/pool" since the dictionary key in the body carries it.
         add_pools_resp = requests.delete(
             f"{api_path}/data/Cisco-IOS-XE-native:native/ip/dhcp",
             headers=post_headers,
@@ -57,16 +57,15 @@ def main():
             verify=False,
         )
 
-    # HTTP 201 means "created", implying a new resource was added. The
-    # response will tell us the URL of the newly-created resource, simplifying
-    # future removal.
-        print(add_pools_resp.status_code)
-        print(add_pools_resp.reason)
+        # HTTP 204 means "request successful, no response body returned",
+        # implying a resource was deleted. 
+        # print(add_pools_resp.status_code)
+        # print(add_pools_resp.reason)
     
-        if add_pools_resp.status_code == 201:
+        if add_pools_resp.status_code == 204:
             print(f"Deleted DHCP pool at: {add_pools_resp.headers['Location']}")
 
-        # Save configuration whenever the DHCP pool is added. This ensures
+        # Save configuration whenever the DHCP pool is deleted. This ensures
         # the configuration will persist across reboots.
             save_config_resp = requests.post(
                 f"{api_path}/operations/cisco-ia:save-config",
