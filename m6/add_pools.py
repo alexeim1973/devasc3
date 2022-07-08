@@ -80,7 +80,7 @@ def main():
             if save_config_resp.ok:
                 print("Saved configuration")
         elif dhcp_pools_resp.status_code == 409:
-            print('DHCP pool already exists:', dhcp_pool["id"])
+            print('DHCP pool already exists:', dhcp_pool["Cisco-IOS-XE-dhcp:pool"]["id"])
 
 
 if __name__ == "__main__":
